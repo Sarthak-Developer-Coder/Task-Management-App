@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Task Manager</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <main class="container">
+    <h1>AI Task Manager</h1>
+
+    <section id="auth">
+      <h2>Sign In / Register</h2>
+      <input id="reg_name" placeholder="Name (register)" />
+      <input id="reg_email" placeholder="Email" />
+      <input id="reg_password" placeholder="Password" type="password" />
+      <button id="register">Register</button>
+
+      <hr />
+      <input id="login_email" placeholder="Email" />
+      <input id="login_password" placeholder="Password" type="password" />
+      <button id="login">Login</button>
+    </section>
+
+    <section id="app" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Your Tasks</h2>
+        <div>
+          <button id="logout">Logout</button>
+        </div>
+      </div>
+
+      <section class="new-task">
+        <input id="title" placeholder="Task title" />
+        <input id="due_date" type="date" />
+        <textarea id="description" placeholder="Description (optional)"></textarea>
+        <button id="add">Add Task</button>
+      </section>
+
+      <ul id="tasks"></ul>
+    </section>
+  </main>
+</body>
+</html>
