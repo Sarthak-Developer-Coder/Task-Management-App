@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Start server in background
+        run: |
+          nohup node backend/server.js > server.log 2>&1 &
+          # wait for server
+          n=0; until curl --silent --fail http://localhost:3001/ || [ $n -ge 15 ]; do n=$((n+1)); sleep 1; done
+      - name: Run API tests
+        run: node tools/test-api.js
+      - name: Upload server log (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-log
+          path: server.log
