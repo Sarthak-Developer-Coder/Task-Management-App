@@ -23,6 +23,17 @@ db.serialize(() => {
     updated_at TEXT,
     FOREIGN KEY(user_id) REFERENCES users(id)
   )`);
+  // Ensure migration: if tasks table existed without user_id, add the column
+  db.all("PRAGMA table_info(tasks)", (err, rows) => {
+    if (err) return console.error('PRAGMA failed', err);
+    const hasUserId = rows && rows.some(r => r.name === 'user_id');
+    if (!hasUserId) {
+      db.run('ALTER TABLE tasks ADD COLUMN user_id INTEGER', (e) => {
+        if (e) console.error('Failed to add user_id column:', e.message);
+        else console.log('Migrated: added user_id to tasks');
+      });
+    }
+  });
 });
 
 module.exports = db;

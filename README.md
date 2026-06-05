@@ -19,6 +19,15 @@ npm run dev
 
 3. Open http://localhost:3000
 
+Authentication
+
+1. Register a new account from the web UI (name, email, password).
+2. Login to receive a JWT stored in `localStorage` for subsequent requests.
+
+Repository
+
+The project is pushed to the public GitHub repo: https://github.com/Sarthak-Developer-Coder/Task-Management-App.git
+
 Project structure
 - `backend/` — Express server and SQLite DB init
 - `public/` — static frontend (HTML/JS/CSS)
