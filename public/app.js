@@ -2,7 +2,9 @@ async function api(path, opts = {}) {
   opts.headers = opts.headers || {};
   const token = localStorage.getItem('token');
   if (token) opts.headers['Authorization'] = 'Bearer ' + token;
-  const res = await fetch(path, opts);
+    const API_BASE = (typeof window !== 'undefined' && window.__API_BASE__) ? window.__API_BASE__ : '';
+    const url = path.startsWith('http') ? path : (API_BASE ? API_BASE.replace(/\/$/, '') + path : path);
+    const res = await fetch(url, opts);
   if (!res.ok) {
     let msg;
     try {

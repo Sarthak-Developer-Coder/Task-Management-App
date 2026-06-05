@@ -16,12 +16,12 @@ Deploy frontend: Vercel (static)
 1. Create a Vercel account (https://vercel.com) and connect the GitHub repository.
 2. When creating a project, choose this repo. In "Framework Preset" select "Other".
 3. Set the Output Directory to `public`.
-4. Set an environment variable `REACT_APP_API_BASE` or similar if your frontend needs to call the API. For this project, edit `public/app.js` if you need to point to a deployed backend; by default it calls `/api/*` on the same host.
+4. Add environment variable `API_BASE` = `https://<your-backend>.onrender.com` (or your Render URL). Vercel exposes this at build time and `tools/generate-env.js` will write `public/env.js` for the frontend.
 5. Deploy. Vercel will provide a live URL for the frontend.
 
 Notes about configuration
 
-- If you host the backend on Render, set the frontend's API base to the Render URL: e.g. `https://your-service.onrender.com` and update `public/app.js` or set a small proxy configuration.
+- If you host the backend on Render, set the frontend's `API_BASE` to the Render URL: e.g. `https://your-service.onrender.com`. The `tools/generate-env.js` script will also use `RENDER_EXTERNAL_URL` when present.
 - Alternatively, deploy both frontend and backend to Render and use the service URL for both.
 
 Using GitHub Actions to deploy to Render
