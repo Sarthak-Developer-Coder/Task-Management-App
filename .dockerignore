@@ -1,0 +1,8 @@
+node_modules
+data.db
+npm-debug.log
+.env
+.git
+public/node_modules
+dist
+server.log
